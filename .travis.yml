@@ -16,8 +16,8 @@ after_success:
   - docker build -t deking1772/docker-backend ./backend
   - docker build -t deking1772/docker-nginx ./nginx
 
-  - echo "$DOCKER_HUB_PASSWORKD" | "$DOCKER logon - "$DOCKER_HUB_ID" --password-stdin
+  - echo "$DOCKER_HUB_PASSWORD" | docker login - "$DOCKER_HUB_ID" --password-stdin
 
   - docker push deking1772/docker-frontend
-  - docker push deking1772/docker-bakcend
+  - docker push deking1772/docker-backend
   - docker push deking1772/docker-nginx
