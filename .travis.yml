@@ -1,0 +1,23 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t deking1772/react-test-app -f .frontend/Dockerfile.dev ./frontend
+
+script:
+  - decker run -e CI=true deking1772/react-test-app npm run test
+
+after_success:
+  - docker build -t deking1772/docker-frontend ./frontend
+  - docker build -t deking1772/docker-backend ./backend
+  - docker build -t deking1772/docker-nginx ./nginx
+
+  - echo "$DOCKER_HUB_PASSWORKD" | "$DOCKER logon - "$DOCKER_HUB_ID" --password-stdin
+
+  - docker push deking1772/docker-frontend
+  - docker push deking1772/docker-bakcend
+  - docker push deking1772/docker-nginx
