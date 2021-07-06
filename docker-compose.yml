@@ -1,12 +1,12 @@
 version: "3"
 services:
-  frontend1:
+  frontend:
     build:
       dockerfile: "Dockerfile.dev"
-      context: ./frontend1
+      context: ./frontend
     volumes:
       - /app/node_modules
-      - ./frontend1:/app
+      - ./frontend:/app
     stdin_open: true
   nginx:
     restart: always
